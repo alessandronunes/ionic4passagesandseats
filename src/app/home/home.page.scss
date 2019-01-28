@@ -1,1 +1,115 @@
+ion-list{
+    background-color: #f9f9f9;
+}
 
+.route{
+    text-align: center;
+    background-color: #5d1499;
+    color: #ffffff;
+    font-size: 12px;
+
+    .destination{
+        line-height: 38px;
+        font-size: 24px;
+        text-align: center;
+    
+        .skeleton{
+            line-height: 38px;
+            height: 24px;
+            width: 200px;
+            display: inline-block;
+        }
+    }
+
+    .dates{
+        margin-top: 20px;
+        font-size: 14px;
+
+        div{
+            margin-bottom: 8px;
+        }
+
+        ion-col{
+            border-bottom: 2px solid #5d1499;
+            color: #ffcc3e;
+        }
+        .selectedDate{
+            border-bottom: 2px solid #ffcc3e;
+        }
+    }
+}
+
+.trip:hover{
+    cursor: pointer;
+}
+.trip{
+    background-color: #ffffff;
+    border-bottom: 1px solid #e3e3e3;
+    margin-bottom: 10px;
+    padding: 10px 10px 0px 10px;
+
+    *{
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .time{
+        font-size: 16px;
+
+        .departure{
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+
+    .duration{
+        text-align: right;
+    }
+
+    .availableSeats{
+        color: #FF0000;
+        text-align: right;
+    }
+
+    .travelCompany{
+
+        .iconFrom{
+            color: #FF0000;
+        }
+        .iconTo{
+            color: #5d1499;
+        }
+    }
+
+    .selectButton{
+        text-align: right;
+        color:#ffcc3e;
+
+        ion-button{
+            --box-shadow: none;
+        }
+
+        .selectIcon{
+            font-size: 20px
+        }
+    }
+
+    .selectButtonText{
+        text-transform: none;
+    }
+
+    .mobileMargin{
+        height: 10px;
+    }
+
+    .mobileBorder{
+        border-bottom: 1px solid #e3e3e3;
+        height: 1px;
+    }
+
+    .price{
+        font-weight: bold;
+        font-size: 18px;
+        text-align: right;
+    }
+}

@@ -1,12 +1,74 @@
-<ion-header>
+<ion-header no-shadow no-border>
   <ion-toolbar>
+    <ion-buttons start>
+      <ion-button clear ion-button icon-only>
+        <ion-icon name="arrow-back" color="danger"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>
-      Ionic Blank
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://beta.ionicframework.com/docs/">docs</a> will be your guide.</p>
+<ion-content>
+  <div class="route">
+    Indo para
+    <div class="destination">
+      <div *ngIf="trips.destination" class="fadeIn">{{trips.destination?.cityName}}</div>
+      <div *ngIf="!trips.destination" class="skeleton"></div>
+    </div>
+    <ion-grid class="dates">
+      <ion-row>
+        <ion-col>
+          <div>Jan 21</div> Seg
+        </ion-col>
+        <ion-col class="selectedDate">
+          <div>Jan 22</div> Ter
+        </ion-col>
+        <ion-col>
+          <div>Jan 23</div> Qua
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-list>
+    <ion-grid *ngFor="let trip of trips.departures" class="trip fadeIn" [routerLink]="'/seats/' + trip.parts[0].tripId" routerDirection="forward">
+      <ion-row align-items-center>
+        <ion-col size-xs="6" push-md="1" size-md="1" class="time">
+          <span class="departure">{{trip.parts[0].departure.schedule.time | slice:0:5}}</span>
+          <ion-icon name="arrow-forward" *ngIf="mobile"></ion-icon>
+          {{trip.parts[0].arrival.schedule.time | slice:0:5}}
+        </ion-col>
+        <ion-col size-xs="6" push-md="7" size-md="2" class="price">
+          R$ {{trip.price}}
+        </ion-col>
+        <ion-col size-xs="12" *ngIf="mobile" class="mobileMargin">&nbsp;</ion-col>
+        <ion-col size-xs="3" size-md="1" pull-md="3" class="travelCompany"><img src="{{trip.parts[0].travelCompany.logo}}"></ion-col>
+        <ion-col size-xs="7" size-md="3" pull-md="2" class="travelCompany">
+          <div>
+            <ion-icon name="navigate" class="iconFrom"></ion-icon> {{trip.from}}
+          </div>
+          <div>
+            <ion-icon name="pin" class="iconTo"></ion-icon> {{trip.to}}
+          </div>
+        </ion-col>
+        <ion-col size-xs="2" *ngIf="mobile" class="travelCompany selectButton">
+            <ion-button color="danger" ion-button icon-only size-xs="small" strong>
+                <ion-icon class="selectIcon" name="arrow-forward"></ion-icon>
+            </ion-button>
+        </ion-col>
+        <ion-col size-xs="12" *ngIf="mobile" class="mobileBorder">&nbsp;</ion-col>
+        <ion-col size-xs="4" size-md="2" pull-md="2">{{trip.parts[0].bus.name}}</ion-col>
+        <ion-col size-xs="3" size-md="1" pull-md="2" class="duration">{{trip.duration}}</ion-col>
+        <ion-col size-xs="5" *ngIf="mobile" class="availableSeats">
+          <ion-icon name="flame"></ion-icon> {{trip.parts[0].availableSeats}} disponíveis
+        </ion-col>
+        <ion-col size-md="2" *ngIf="!mobile" class="travelCompany selectButton">
+            <ion-button class="selectButtonText" color="danger" ion-button size="small">
+                Selecionar
+            </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
 </ion-content>

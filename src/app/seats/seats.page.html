@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <ion-button clear ion-button icon-only (click)="close()">
+        <ion-icon name="close" color="danger"></ion-icon>
+      </ion-button>
+      Selecione os seus assentos
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="labels">
+    <ion-grid>
+      <ion-col>
+        <div class="freeLabel"></div> Livre
+      </ion-col>
+      <ion-col>
+        <div class="selectedLabel"></div> Selecionado
+      </ion-col>
+      <ion-col>
+        <div class="noLabel"></div> Ocupado
+      </ion-col>
+    </ion-grid>
+  </div>
+
+  <ion-grid class="transport"  [ngClass]="(mobile)? 'mobile' : 'desktop'">
+    <ion-row>
+    <ion-col size="{{frontSize}}" class="front">
+      <img [src]="(mobile) ? 'assets/bus-front.png' : 'assets/bus-front-desktop.png'">
+    </ion-col>
+    <ion-col size="{{seatsSize}}" class="seats">
+      <div *ngFor="let rows of seatsReady">
+        <div *ngFor="let seat of rows" [ngClass]="seat.class" [ngStyle]="{'width': colSize+'%', 'background-image': (seat.background)? 'url(assets/seat-' + seat.background + '.png)' : 'none'}"
+          (click)="selectSeat(seat, seat.position?.x, seat.position?.y)">
+          <span *ngIf="seat.available">
+            {{seat.label}}
+          </span>
+        </div>
+      </div>
+    </ion-col>
+    <ion-col size="{{backSize}}" class="back">
+        <img [src]="(mobile) ? 'assets/bus-back.png' : 'assets/bus-back-desktop.png'">
+    </ion-col>
+  </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <div class="selection">
+    <span *ngIf="selectedCount == 0">Nenhum </span>
+    <span *ngIf="selectedCount > 0">{{selectedCount}}</span>
+    <span *ngIf="selectedCount <= 1"> assento selecionado</span>
+    <span *ngIf="selectedCount > 1"> assentos selecionados</span>
+  </div>
+  <div class="continue">
+    <ion-button ion-button (click)="close()" expand="full" color="danger">
+      Continuar reserva
+    </ion-button>
+  </div>
+</ion-footer>

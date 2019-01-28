@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <ion-button clear ion-button icon-only (click)="close()">
+        <ion-icon name="close" color="danger"></ion-icon>
+      </ion-button>
+      Selecione os seus assentos
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="labels">
+    <ion-grid>
+      <ion-col>
+        <div class="freeLabel"></div> Livre
+      </ion-col>
+      <ion-col>
+        <div class="selectedLabel"></div> Selecionado
+      </ion-col>
+      <ion-col>
+        <div class="noLabel"></div> Ocupado
+      </ion-col>
+    </ion-grid>
+  </div>
+  <div class="transport">
+    <div class="front">
+      <img src="assets/bus-front.svg">
+    </div>
+    <div class="seats">
+      <ion-grid>
+          <ion-row *ngFor="let rows of seatsReady">
+            <ion-col *ngFor="let seat of rows" size="{{colSize}}" 
+              [ngClass]="seat.class" 
+              [ngStyle]="{'background-image': 'url(assets/seat-' + seat.background + '.png)'}" 
+              (click)="selectSeat(seat, seat.position?.x, seat.position?.y)">
+                <span *ngIf="seat.available">
+                  {{seat.label}}
+                </span>
+            </ion-col>
+          </ion-row>
+          <!-- <ion-col size="2" *ngFor="let seat of trip.map" class="seat" (click)="selectSeat()">
+            {{seat.label}}
+          </ion-col> -->
+      </ion-grid>
+    </div>
+    <div class="back">
+      <img src="assets/bus-back.svg">
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <div class="selection">
+    <span *ngIf="selectedCount == 0">Nenhum </span>
+    <span *ngIf="selectedCount > 0">{{selectedCount}}</span>
+    <span *ngIf="selectedCount <= 1"> assento selecionado</span>
+    <span *ngIf="selectedCount > 1"> assentos selecionados</span>
+  </div>
+  <div class="continue">
+    <ion-button ion-button (click)="close()" expand="full" color="danger">
+      Continuar reserva
+    </ion-button>
+  </div>
+</ion-footer>
