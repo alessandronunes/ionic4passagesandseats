@@ -11,7 +11,7 @@ export class TripService {
 
   constructor(private http: HttpClient) { }
 
-  getTripsList(){
+  public getTripsList(){
     
     return new Promise((resolve, reject) => {
     this.http.get('https://clickbus-teste.herokuapp.com/trips')
@@ -24,7 +24,7 @@ export class TripService {
     
   }
 
-  getTripById(tripId:string){
+  public getTripById(tripId:string){
     
     return new Promise((resolve, reject) => {
     this.http.get('https://clickbus-teste.herokuapp.com/trip/'+tripId)

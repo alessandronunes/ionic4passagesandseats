@@ -29,8 +29,6 @@ export class SeatsPage implements OnInit {
     let hLimit = Math.ceil(seatsCount/4);
     let seatsLayout = [];
 
-    this.mobile = this.platform.is('mobile');
-
     if(this.mobile){
 
       // Mobile
@@ -104,15 +102,14 @@ export class SeatsPage implements OnInit {
           }
         }
       }
-
     }
-
-    console.log(seatsLayout);
     
     return seatsLayout;
   }
 
   ngOnInit() {
+
+    this.mobile = this.platform.is('mobile');
 
     this.tripId = this.activatedRoute.snapshot.paramMap.get('tripId');
     this.tripService.getTripById(this.tripId).then(trip => {
